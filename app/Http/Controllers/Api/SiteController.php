@@ -9,12 +9,13 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\DataTransferObjects\SiteData;
 use App\Actions\Site\CreateSiteAction;
+use Spatie\LaravelData\PaginatedDataCollection;
 
 class SiteController extends Controller
 {
     public function index(): mixed
     {
-        return SiteData::collection(Site::paginate());
+        return SiteData::collect(Site::paginate(), PaginatedDataCollection::class);
     }
 
     public function store(Request $request): Response|JsonResponse

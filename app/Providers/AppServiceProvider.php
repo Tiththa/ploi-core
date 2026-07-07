@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use Filament\Navigation\MenuItem;
 use Exception;
 use App\Models\Setting;
 use Filament\Facades\Filament;
+use Filament\Navigation\MenuItem;
 use Filament\Navigation\NavigationItem;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
@@ -14,6 +14,11 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->app->bind(
+            \Spatie\LaravelData\Resolvers\TransformedDataCollectableResolver::class,
+            \App\DataTransferObjects\Support\TransformedDataCollectableResolver::class,
+        );
+
         $this->app->singleton('settings', function ($app) {
             return $app['cache']->remember('core.settings', now()->addDay(), function () {
                 try {

@@ -44,21 +44,25 @@ it('can list packages', function () {
                 [
                     'url' => null,
                     'label' => '&laquo;',
+                    'page' => null,
                     'active' => false,
                 ],
                 [
                     'url' => route('api.package.index', ['page' => 1]),
                     'label' => '1',
+                    'page' => 1,
                     'active' => true,
                 ],
                 [
                     'url' => route('api.package.index', ['page' => 2]),
                     'label' => '2',
+                    'page' => 2,
                     'active' => false,
                 ],
                 [
                     'url' => route('api.package.index', ['page' => 2]),
                     'label' => '&raquo;',
+                    'page' => 2,
                     'active' => false,
                 ],
             ],

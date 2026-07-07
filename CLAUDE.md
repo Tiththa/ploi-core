@@ -63,7 +63,7 @@ php artisan core:trial        # Manage trials
 ## Architecture Overview
 
 ### Technology Stack
-- **Backend**: Laravel 11 (PHP 8.2+), Filament v3 admin panel
+- **Backend**: Laravel 12 (PHP 8.2+), Filament v4 admin panel
 - **Frontend**: Vue 3 with Inertia.js, Tailwind CSS, Vite
 - **Queue**: Laravel Horizon with Redis
 - **Payments**: Laravel Cashier (Stripe)
@@ -133,11 +133,11 @@ The Laravel Boost guidelines are specifically curated by Laravel maintainers for
 ## Foundational Context
 This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
 
-- php - 8.4.10
-- filament/filament (FILAMENT) - v3
+- php - 8.5.7
+- filament/filament (FILAMENT) - v4
 - inertiajs/inertia-laravel (INERTIA) - v2
 - laravel/cashier (CASHIER) - v15
-- laravel/framework (LARAVEL) - v11
+- laravel/framework (LARAVEL) - v12
 - laravel/horizon (HORIZON) - v5
 - laravel/octane (OCTANE) - v2
 - laravel/prompts (PROMPTS) - v0
@@ -148,11 +148,11 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - pestphp/pest (PEST) - v3
 - phpunit/phpunit (PHPUNIT) - v11
 - @inertiajs/vue3 (INERTIA) - v2
-- tailwindcss (TAILWINDCSS) - v3
+- tailwindcss (TAILWINDCSS) - v4
 - vue (VUE) - v3
 
 ## Conventions
-- You must follow all existing code conventions used in this application. When creating or editing a file, check sibling files for the correct structure, approach, naming.
+- You must follow all existing code conventions used in this application. When creating or editing a file, check sibling files for the correct structure, approach, and naming.
 - Use descriptive names for variables and methods. For example, `isRegisteredForDiscounts`, not `discount()`.
 - Check for existing components to reuse before writing a new one.
 
@@ -160,7 +160,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - Do not create verification scripts or tinker when tests cover that functionality and prove it works. Unit and feature tests are more important.
 
 ## Application Structure & Architecture
-- Stick to existing directory structure - don't create new base folders without approval.
+- Stick to existing directory structure; don't create new base folders without approval.
 - Do not change the application's dependencies without approval.
 
 ## Frontend Bundling
@@ -172,17 +172,16 @@ This application is a Laravel application and its main Laravel ecosystems packag
 ## Documentation Files
 - You must only create documentation files if explicitly requested by the user.
 
-
 === boost rules ===
 
 ## Laravel Boost
 - Laravel Boost is an MCP server that comes with powerful tools designed specifically for this application. Use them.
 
 ## Artisan
-- Use the `list-artisan-commands` tool when you need to call an Artisan command to double check the available parameters.
+- Use the `list-artisan-commands` tool when you need to call an Artisan command to double-check the available parameters.
 
 ## URLs
-- Whenever you share a project URL with the user you should use the `get-absolute-url` tool to ensure you're using the correct scheme, domain / IP, and port.
+- Whenever you share a project URL with the user, you should use the `get-absolute-url` tool to ensure you're using the correct scheme, domain/IP, and port.
 
 ## Tinker / Debugging
 - You should use the `tinker` tool when you need to execute PHP to debug code or query Eloquent models directly.
@@ -193,22 +192,21 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - Only recent browser logs will be useful - ignore old logs.
 
 ## Searching Documentation (Critically Important)
-- Boost comes with a powerful `search-docs` tool you should use before any other approaches. This tool automatically passes a list of installed packages and their versions to the remote Boost API, so it returns only version-specific documentation specific for the user's circumstance. You should pass an array of packages to filter on if you know you need docs for particular packages.
-- The 'search-docs' tool is perfect for all Laravel related packages, including Laravel, Inertia, Livewire, Filament, Tailwind, Pest, Nova, Nightwatch, etc.
-- You must use this tool to search for Laravel-ecosystem documentation before falling back to other approaches.
+- Boost comes with a powerful `search-docs` tool you should use before any other approaches when dealing with Laravel or Laravel ecosystem packages. This tool automatically passes a list of installed packages and their versions to the remote Boost API, so it returns only version-specific documentation for the user's circumstance. You should pass an array of packages to filter on if you know you need docs for particular packages.
+- The `search-docs` tool is perfect for all Laravel-related packages, including Laravel, Inertia, Livewire, Filament, Tailwind, Pest, Nova, Nightwatch, etc.
+- You must use this tool to search for Laravel ecosystem documentation before falling back to other approaches.
 - Search the documentation before making code changes to ensure we are taking the correct approach.
-- Use multiple, broad, simple, topic based queries to start. For example: `['rate limiting', 'routing rate limiting', 'routing']`.
-- Do not add package names to queries - package information is already shared. For example, use `test resource table`, not `filament 4 test resource table`.
+- Use multiple, broad, simple, topic-based queries to start. For example: `['rate limiting', 'routing rate limiting', 'routing']`.
+- Do not add package names to queries; package information is already shared. For example, use `test resource table`, not `filament 4 test resource table`.
 
 ### Available Search Syntax
 - You can and should pass multiple queries at once. The most relevant results will be returned first.
 
-1. Simple Word Searches with auto-stemming - query=authentication - finds 'authenticate' and 'auth'
-2. Multiple Words (AND Logic) - query=rate limit - finds knowledge containing both "rate" AND "limit"
-3. Quoted Phrases (Exact Position) - query="infinite scroll" - Words must be adjacent and in that order
-4. Mixed Queries - query=middleware "rate limit" - "middleware" AND exact phrase "rate limit"
-5. Multiple Queries - queries=["authentication", "middleware"] - ANY of these terms
-
+1. Simple Word Searches with auto-stemming - query=authentication - finds 'authenticate' and 'auth'.
+2. Multiple Words (AND Logic) - query=rate limit - finds knowledge containing both "rate" AND "limit".
+3. Quoted Phrases (Exact Position) - query="infinite scroll" - words must be adjacent and in that order.
+4. Mixed Queries - query=middleware "rate limit" - "middleware" AND exact phrase "rate limit".
+5. Multiple Queries - queries=["authentication", "middleware"] - ANY of these terms.
 
 === php rules ===
 
@@ -219,7 +217,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 ### Constructors
 - Use PHP 8 constructor property promotion in `__construct()`.
     - <code-snippet>public function __construct(public GitHub $github) { }</code-snippet>
-- Do not allow empty `__construct()` methods with zero parameters.
+- Do not allow empty `__construct()` methods with zero parameters unless the constructor is private.
 
 ### Type Declarations
 - Always use explicit return type declarations for methods and functions.
@@ -233,7 +231,7 @@ protected function isAccessible(User $user, ?string $path = null): bool
 </code-snippet>
 
 ## Comments
-- Prefer PHPDoc blocks over comments. Never use comments within the code itself unless there is something _very_ complex going on.
+- Prefer PHPDoc blocks over inline comments. Never use comments within the code itself unless there is something very complex going on.
 
 ## PHPDoc Blocks
 - Add useful array shape type definitions for arrays when appropriate.
@@ -241,24 +239,22 @@ protected function isAccessible(User $user, ?string $path = null): bool
 ## Enums
 - Typically, keys in an Enum should be TitleCase. For example: `FavoritePerson`, `BestLake`, `Monthly`.
 
-
 === tests rules ===
 
 ## Test Enforcement
 
 - Every change must be programmatically tested. Write a new test or update an existing test, then run the affected tests to make sure they pass.
-- Run the minimum number of tests needed to ensure code quality and speed. Use `php artisan test` with a specific filename or filter.
-
+- Run the minimum number of tests needed to ensure code quality and speed. Use `php artisan test --compact` with a specific filename or filter.
 
 === inertia-laravel/core rules ===
 
-## Inertia Core
+## Inertia
 
-- Inertia.js components should be placed in the `resources/js/Pages` directory unless specified differently in the JS bundler (vite.config.js).
+- Inertia.js components should be placed in the `resources/js/Pages` directory unless specified differently in the JS bundler (`vite.config.js`).
 - Use `Inertia::render()` for server-side routing instead of traditional Blade views.
-- Use `search-docs` for accurate guidance on all things Inertia.
+- Use the `search-docs` tool for accurate guidance on all things Inertia.
 
-<code-snippet lang="php" name="Inertia::render Example">
+<code-snippet name="Inertia Render Example" lang="php">
 // routes/web.php example
 Route::get('/users', function () {
     return Inertia::render('Users/Index', [
@@ -267,26 +263,24 @@ Route::get('/users', function () {
 });
 </code-snippet>
 
-
 === inertia-laravel/v2 rules ===
 
 ## Inertia v2
 
-- Make use of all Inertia features from v1 & v2. Check the documentation before making any changes to ensure we are taking the correct approach.
+- Make use of all Inertia features from v1 and v2. Check the documentation before making any changes to ensure we are taking the correct approach.
 
 ### Inertia v2 New Features
-- Polling
-- Prefetching
-- Deferred props
-- Infinite scrolling using merging props and `WhenVisible`
-- Lazy loading data on scroll
+- Deferred props.
+- Infinite scrolling using merging props and `WhenVisible`.
+- Lazy loading data on scroll.
+- Polling.
+- Prefetching.
 
 ### Deferred Props & Empty States
-- When using deferred props on the frontend, you should add a nice empty state with pulsing / animated skeleton.
+- When using deferred props on the frontend, you should add a nice empty state with pulsing/animated skeleton.
 
 ### Inertia Form General Guidance
-- Build forms using the `useForm` helper. Use the code examples and `search-docs` tool with a query of `useForm helper` for guidance.
-
+- Build forms using the `useForm` helper. Use the code examples and the `search-docs` tool with a query of `useForm helper` for guidance.
 
 === laravel/core rules ===
 
@@ -298,7 +292,7 @@ Route::get('/users', function () {
 
 ### Database
 - Always use proper Eloquent relationship methods with return type hints. Prefer relationship methods over raw queries or manual joins.
-- Use Eloquent models and relationships before suggesting raw database queries
+- Use Eloquent models and relationships before suggesting raw database queries.
 - Avoid `DB::`; prefer `Model::query()`. Generate code that leverages Laravel's ORM capabilities rather than bypassing them.
 - Generate code that prevents N+1 query problems by using eager loading.
 - Use Laravel's query builder for very complex database operations.
@@ -333,44 +327,37 @@ Route::get('/users', function () {
 ### Vite Error
 - If you receive an "Illuminate\Foundation\ViteException: Unable to locate file in Vite manifest" error, you can run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
 
+=== laravel/v12 rules ===
 
-=== laravel/v11 rules ===
+## Laravel 12
 
-## Laravel 11
-
-- Use the `search-docs` tool to get version specific documentation.
-- This project upgraded from Laravel 10 without migrating to the new streamlined Laravel 11 file structure.
-- This is **perfectly fine** and recommended by Laravel. Follow the existing structure from Laravel 10. We do not to need migrate to the Laravel 11 structure unless the user explicitly requests that.
+- Use the `search-docs` tool to get version-specific documentation.
+- This project upgraded from Laravel 10 without migrating to the new streamlined Laravel file structure.
+- This is **perfectly fine** and recommended by Laravel. Follow the existing structure from Laravel 10. We do not need to migrate to the new Laravel structure unless the user explicitly requests it.
 
 ### Laravel 10 Structure
-- Middleware typically live in `app/Http/Middleware/` and service providers in `app/Providers/`.
+- Middleware typically lives in `app/Http/Middleware/` and service providers in `app/Providers/`.
 - There is no `bootstrap/app.php` application configuration in a Laravel 10 structure:
-    - Middleware registration is in `app/Http/Kernel.php`
+    - Middleware registration happens in `app/Http/Kernel.php`
     - Exception handling is in `app/Exceptions/Handler.php`
-    - Console commands and schedule registration is in `app/Console/Kernel.php`
+    - Console commands and schedule register in `app/Console/Kernel.php`
     - Rate limits likely exist in `RouteServiceProvider` or `app/Http/Kernel.php`
 
 ### Database
 - When modifying a column, the migration must include all of the attributes that were previously defined on the column. Otherwise, they will be dropped and lost.
-- Laravel 11 allows limiting eagerly loaded records natively, without external packages: `$query->latest()->limit(10);`.
+- Laravel 12 allows limiting eagerly loaded records natively, without external packages: `$query->latest()->limit(10);`.
 
 ### Models
 - Casts can and likely should be set in a `casts()` method on a model rather than the `$casts` property. Follow existing conventions from other models.
 
-### New Artisan Commands
-- List Artisan commands using Boost's MCP tool, if available. New commands available in Laravel 11:
-    - `php artisan make:enum`
-    - `php artisan make:class `
-    - `php artisan make:interface `
-
-
 === livewire/core rules ===
 
-## Livewire Core
-- Use the `search-docs` tool to find exact version specific documentation for how to write Livewire & Livewire tests.
-- Use the `php artisan make:livewire [Posts\CreatePost]` artisan command to create new components
+## Livewire
+
+- Use the `search-docs` tool to find exact version-specific documentation for how to write Livewire and Livewire tests.
+- Use the `php artisan make:livewire [Posts\CreatePost]` Artisan command to create new components.
 - State should live on the server, with the UI reflecting it.
-- All Livewire requests hit the Laravel backend, they're like regular HTTP requests. Always validate form data, and run authorization checks in Livewire actions.
+- All Livewire requests hit the Laravel backend; they're like regular HTTP requests. Always validate form data and run authorization checks in Livewire actions.
 
 ## Livewire Best Practices
 - Livewire components require a single root element.
@@ -387,15 +374,14 @@ Route::get('/users', function () {
 
 - Prefer lifecycle hooks like `mount()`, `updatedFoo()` for initialization and reactive side effects:
 
-<code-snippet name="Lifecycle hook examples" lang="php">
+<code-snippet name="Lifecycle Hook Examples" lang="php">
     public function mount(User $user) { $this->user = $user; }
     public function updatedSearch() { $this->resetPage(); }
 </code-snippet>
 
-
 ## Testing Livewire
 
-<code-snippet name="Example Livewire component test" lang="php">
+<code-snippet name="Example Livewire Component Test" lang="php">
     Livewire::test(Counter::class)
         ->assertSet('count', 0)
         ->call('increment')
@@ -404,19 +390,17 @@ Route::get('/users', function () {
         ->assertStatus(200);
 </code-snippet>
 
-
-    <code-snippet name="Testing a Livewire component exists within a page" lang="php">
-        $this->get('/posts/create')
-        ->assertSeeLivewire(CreatePost::class);
-    </code-snippet>
-
+<code-snippet name="Testing Livewire Component Exists on Page" lang="php">
+    $this->get('/posts/create')
+    ->assertSeeLivewire(CreatePost::class);
+</code-snippet>
 
 === livewire/v3 rules ===
 
 ## Livewire 3
 
 ### Key Changes From Livewire 2
-- These things changed in Livewire 2, but may not have been updated in this application. Verify this application's setup to ensure you conform with application conventions.
+- These things changed in Livewire 3, but may not have been updated in this application. Verify this application's setup to ensure you conform with application conventions.
     - Use `wire:model.live` for real-time updates, `wire:model` is now deferred by default.
     - Components now use the `App\Livewire` namespace (not `App\Http\Livewire`).
     - Use `$this->dispatch()` to dispatch events (not `emit` or `dispatchBrowserEvent`).
@@ -426,13 +410,13 @@ Route::get('/users', function () {
 - `wire:show`, `wire:transition`, `wire:cloak`, `wire:offline`, `wire:target` are available for use. Use the documentation to find usage examples.
 
 ### Alpine
-- Alpine is now included with Livewire, don't manually include Alpine.js.
+- Alpine is now included with Livewire; don't manually include Alpine.js.
 - Plugins included with Alpine: persist, intersect, collapse, and focus.
 
 ### Lifecycle Hooks
 - You can listen for `livewire:init` to hook into Livewire initialization, and `fail.status === 419` for the page expiring:
 
-<code-snippet name="livewire:load example" lang="js">
+<code-snippet name="Livewire Init Hook Example" lang="js">
 document.addEventListener('livewire:init', function () {
     Livewire.hook('request', ({ fail }) => {
         if (fail && fail.status === 419) {
@@ -445,7 +429,6 @@ document.addEventListener('livewire:init', function () {
     });
 });
 </code-snippet>
-
 
 === pest/core rules ===
 
@@ -467,9 +450,9 @@ it('is true', function () {
 
 ### Running Tests
 - Run the minimal number of tests using an appropriate filter before finalizing code edits.
-- To run all tests: `php artisan test`.
-- To run all tests in a file: `php artisan test tests/Feature/ExampleTest.php`.
-- To filter on a particular test name: `php artisan test --filter=testName` (recommended after making a change to a related file).
+- To run all tests: `php artisan test --compact`.
+- To run all tests in a file: `php artisan test --compact tests/Feature/ExampleTest.php`.
+- To filter on a particular test name: `php artisan test --compact --filter=testName` (recommended after making a change to a related file).
 - When the tests relating to your changes are passing, ask the user if they would like to run the entire test suite to ensure everything is still passing.
 
 ### Pest Assertions
@@ -488,7 +471,7 @@ it('returns all', function () {
 - You can also create partial mocks using the same import or self method.
 
 ### Datasets
-- Use datasets in Pest to simplify tests which have a lot of duplicated data. This is often the case when testing validation rules, so consider going with this solution when writing tests for validation rules.
+- Use datasets in Pest to simplify tests that have a lot of duplicated data. This is often the case when testing validation rules, so consider this solution when writing tests for validation rules.
 
 <code-snippet name="Pest Dataset Example" lang="php">
 it('has emails', function (string $email) {
@@ -498,7 +481,6 @@ it('has emails', function (string $email) {
     'taylor' => 'taylor@laravel.com',
 ]);
 </code-snippet>
-
 
 === inertia-vue/core rules ===
 
@@ -514,10 +496,9 @@ it('has emails', function (string $email) {
 
 </code-snippet>
 
-
 === inertia-vue/v2/forms rules ===
 
-## Inertia + Vue Forms
+## Inertia v2 + Vue Forms
 
 <code-snippet name="Inertia Vue useForm example" lang="vue">
 
@@ -548,129 +529,318 @@ it('has emails', function (string $email) {
 
 </code-snippet>
 
-
 === tailwindcss/core rules ===
 
-## Tailwind Core
+## Tailwind CSS
 
-- Use Tailwind CSS classes to style HTML, check and use existing tailwind conventions within the project before writing your own.
-- Offer to extract repeated patterns into components that match the project's conventions (i.e. Blade, JSX, Vue, etc..)
-- Think through class placement, order, priority, and defaults - remove redundant classes, add classes to parent or child carefully to limit repetition, group elements logically
+- Use Tailwind CSS classes to style HTML; check and use existing Tailwind conventions within the project before writing your own.
+- Offer to extract repeated patterns into components that match the project's conventions (i.e. Blade, JSX, Vue, etc.).
+- Think through class placement, order, priority, and defaults. Remove redundant classes, add classes to parent or child carefully to limit repetition, and group elements logically.
 - You can use the `search-docs` tool to get exact examples from the official documentation when needed.
 
 ### Spacing
-- When listing items, use gap utilities for spacing, don't use margins.
+- When listing items, use gap utilities for spacing; don't use margins.
 
-    <code-snippet name="Valid Flex Gap Spacing Example" lang="html">
-        <div class="flex gap-8">
-            <div>Superior</div>
-            <div>Michigan</div>
-            <div>Erie</div>
-        </div>
-    </code-snippet>
-
+<code-snippet name="Valid Flex Gap Spacing Example" lang="html">
+    <div class="flex gap-8">
+        <div>Superior</div>
+        <div>Michigan</div>
+        <div>Erie</div>
+    </div>
+</code-snippet>
 
 ### Dark Mode
 - If existing pages and components support dark mode, new pages and components must support dark mode in a similar way, typically using `dark:`.
 
+=== tailwindcss/v4 rules ===
 
-=== tailwindcss/v3 rules ===
+## Tailwind CSS 4
 
-## Tailwind 3
+- Always use Tailwind CSS v4; do not use the deprecated utilities.
+- `corePlugins` is not supported in Tailwind v4.
+- In Tailwind v4, configuration is CSS-first using the `@theme` directive — no separate `tailwind.config.js` file is needed.
 
-- Always use Tailwind CSS v3 - verify you're using only classes supported by this version.
+<code-snippet name="Extending Theme in CSS" lang="css">
+@theme {
+  --color-brand: oklch(0.72 0.11 178);
+}
+</code-snippet>
 
+- In Tailwind v4, you import Tailwind using a regular CSS `@import` statement, not using the `@tailwind` directives used in v3:
+
+<code-snippet name="Tailwind v4 Import Tailwind Diff" lang="diff">
+   - @tailwind base;
+   - @tailwind components;
+   - @tailwind utilities;
+   + @import "tailwindcss";
+</code-snippet>
+
+### Replaced Utilities
+- Tailwind v4 removed deprecated utilities. Do not use the deprecated option; use the replacement.
+- Opacity values are still numeric.
+
+| Deprecated |	Replacement |
+|------------+--------------|
+| bg-opacity-* | bg-black/* |
+| text-opacity-* | text-black/* |
+| border-opacity-* | border-black/* |
+| divide-opacity-* | divide-black/* |
+| ring-opacity-* | ring-black/* |
+| placeholder-opacity-* | placeholder-black/* |
+| flex-shrink-* | shrink-* |
+| flex-grow-* | grow-* |
+| overflow-ellipsis | text-ellipsis |
+| decoration-slice | box-decoration-slice |
+| decoration-clone | box-decoration-clone |
 
 === filament/filament rules ===
 
 ## Filament
-- Filament is used by this application, check how and where to follow existing application conventions.
-- Filament is a Server-Driven UI (SDUI) framework for Laravel. It allows developers to define user interfaces in PHP using structured configuration objects. It is built on top of Livewire, Alpine.js, and Tailwind CSS.
-- You can use the `search-docs` tool to get information from the official Filament documentation when needed. This is very useful for Artisan command arguments, specific code examples, testing functionality, relationship management, and ensuring you're following idiomatic practices.
-- Utilize static `make()` methods for consistent component initialization.
+
+- Filament is a Laravel UI framework built on Livewire, Alpine.js, and Tailwind CSS. UIs are defined in PHP via fluent, chainable components. Follow existing conventions in this app.
+- Use the `search-docs` tool for official documentation on Artisan commands, code examples, testing, relationships, and idiomatic practices. If `search-docs` is unavailable, refer to https://filamentphp.com/docs.
 
 ### Artisan
-- You must use the Filament specific Artisan commands to create new files or components for Filament. You can find these with the `list-artisan-commands` tool, or with `php artisan` and the `--help` option.
-- Inspect the required options, always pass `--no-interaction`, and valid arguments for other options when applicable.
 
-### Filament's Core Features
-- Actions: Handle doing something within the application, often with a button or link. Actions encapsulate the UI, the interactive modal window, and the logic that should be executed when the modal window is submitted. They can be used anywhere in the UI and are commonly used to perform one-time actions like deleting a record, sending an email, or updating data in the database based on modal form input.
-- Forms: Dynamic forms rendered within other features, such as resources, action modals, table filters, and more.
-- Infolists: Read-only lists of data.
-- Notifications: Flash notifications displayed to users within the application.
-- Panels: The top-level container in Filament that can include all other features like pages, resources, forms, tables, notifications, actions, infolists, and widgets.
-- Resources: Static classes that are used to build CRUD interfaces for Eloquent models. Typically live in `app/Filament/Resources`.
-- Schemas: Represent components that define the structure and behavior of the UI, such as forms, tables, or lists.
-- Tables: Interactive tables with filtering, sorting, pagination, and more.
-- Widgets: Small component included within dashboards, often used for displaying data in charts, tables, or as a stat.
+- Always use Filament-specific Artisan commands to create files. Find available commands with the `list-artisan-commands` tool, or run `php artisan --help`.
+- Inspect required options before running, and always pass `--no-interaction`.
 
-### Relationships
-- Determine if you can use the `relationship()` method on form components when you need `options` for a select, checkbox, repeater, or when building a `Fieldset`:
+### Patterns
 
-<code-snippet name="Relationship example for Form Select" lang="php">
-Forms\Components\Select::make('user_id')
-    ->label('Author')
-    ->relationship('author')
+Always use static `make()` methods to initialize components. Most configuration methods accept a `Closure` for dynamic values.
+
+Use `Get $get` to read other form field values for conditional logic:
+
+<code-snippet name="Conditional form field visibility" lang="php">
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Utilities\Get;
+
+Select::make('type')
+    ->options(CompanyType::class)
+    ->required()
+    ->live(),
+
+TextInput::make('company_name')
+    ->required()
+    ->visible(fn (Get $get): bool => $get('type') === 'business'),
+
+</code-snippet>
+
+Use `Set $set` inside `->afterStateUpdated()` on a `->live()` field to mutate another field reactively. Prefer `->live(onBlur: true)` on text inputs to avoid per-keystroke updates:
+
+<code-snippet name="Reactive field update" lang="php">
+use Filament\Schemas\Components\Utilities\Set;
+use Illuminate\Support\Str;
+
+TextInput::make('title')
+    ->required()
+    ->live(onBlur: true)
+    ->afterStateUpdated(fn (Set $set, ?string $state) => $set(
+        'slug',
+        Str::slug($state ?? ''),
+    )),
+
+TextInput::make('slug')
     ->required(),
+
 </code-snippet>
 
+Compose layout by nesting `Section` and `Grid`. Children need explicit `->columnSpan()` or `->columnSpanFull()`:
 
-## Testing
-- It's important to test Filament functionality for user satisfaction.
-- Ensure that you are authenticated to access the application within the test.
-- Filament uses Livewire, so start assertions with `livewire()` or `Livewire::test()`.
+<code-snippet name="Section and Grid layout" lang="php">
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 
-### Example Tests
+Section::make('Details')
+    ->schema([
+        Grid::make(2)->schema([
+            TextInput::make('first_name')
+                ->columnSpan(1),
+            TextInput::make('last_name')
+                ->columnSpan(1),
+            TextInput::make('bio')
+                ->columnSpanFull(),
+        ]),
+    ]),
 
-<code-snippet name="Filament Table Test" lang="php">
-    livewire(ListUsers::class)
-        ->assertCanSeeTableRecords($users)
-        ->searchTable($users->first()->name)
-        ->assertCanSeeTableRecords($users->take(1))
-        ->assertCanNotSeeTableRecords($users->skip(1))
-        ->searchTable($users->last()->email)
-        ->assertCanSeeTableRecords($users->take(-1))
-        ->assertCanNotSeeTableRecords($users->take($users->count() - 1));
 </code-snippet>
 
-<code-snippet name="Filament Create Resource Test" lang="php">
-    livewire(CreateUser::class)
-        ->fillForm([
-            'name' => 'Howdy',
-            'email' => 'howdy@example.com',
-        ])
-        ->call('create')
-        ->assertNotified()
-        ->assertRedirect();
+Use `Repeater` for inline `HasMany` management. `->relationship()` with no args binds to the relationship matching the field name:
 
-    assertDatabaseHas(User::class, [
-        'name' => 'Howdy',
-        'email' => 'howdy@example.com',
-    ]);
+<code-snippet name="Repeater for HasMany" lang="php">
+use Filament\Forms\Components\Repeater;
+
+Repeater::make('qualifications')
+    ->relationship()
+    ->schema([
+        TextInput::make('institution')
+            ->required(),
+        TextInput::make('qualification')
+            ->required(),
+    ])
+    ->columns(2),
+
 </code-snippet>
 
-<code-snippet name="Testing Multiple Panels (setup())" lang="php">
-    use Filament\Facades\Filament;
+Use `state()` with a `Closure` to compute derived column values:
 
-    Filament::setCurrentPanel('app');
+<code-snippet name="Computed table column value" lang="php">
+use Filament\Tables\Columns\TextColumn;
+
+TextColumn::make('full_name')
+    ->state(fn (User $record): string => "{$record->first_name} {$record->last_name}"),
+
 </code-snippet>
 
-<code-snippet name="Calling an Action in a Test" lang="php">
-    livewire(EditInvoice::class, [
-        'invoice' => $invoice,
-    ])->callAction('send');
+Use `SelectFilter` for enum or relationship filters, and `Filter` with a `->query()` closure for custom logic:
 
-    expect($invoice->refresh())->isSent()->toBeTrue();
+<code-snippet name="Table filters" lang="php">
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Database\Eloquent\Builder;
+
+SelectFilter::make('status')
+    ->options(UserStatus::class),
+
+SelectFilter::make('author')
+    ->relationship('author', 'name'),
+
+Filter::make('verified')
+    ->query(fn (Builder $query) => $query->whereNotNull('email_verified_at')),
+
 </code-snippet>
 
+Actions are buttons that encapsulate optional modal forms and behavior:
 
-## Version 3 Changes To Focus On
-- Resources are located in `app/Filament/Resources/` directory.
-- Resource pages (List, Create, Edit) are auto-generated within the resource's directory - e.g., `app/Filament/Resources/PostResource/Pages/`.
-- Forms use the `Forms\Components` namespace for form fields.
-- Tables use the `Tables\Columns` namespace for table columns.
-- A new `Filament\Forms\Components\RichEditor` component is available.
-- Form and table schemas now use fluent method chaining.
-- Added `php artisan filament:optimize` command for production optimization.
-- Requires implementing `FilamentUser` contract for production access control.
+<code-snippet name="Action with modal form" lang="php">
+use Filament\Actions\Action;
+
+Action::make('updateEmail')
+    ->schema([
+        TextInput::make('email')
+            ->email()
+            ->required(),
+    ])
+    ->action(fn (array $data, User $record) => $record->update($data)),
+
+</code-snippet>
+
+### Testing
+
+Testing setup (requires `pestphp/pest-plugin-livewire` in `composer.json`):
+
+- Always call `$this->actingAs(User::factory()->create())` before testing panel functionality.
+- For edit pages, pass `['record' => $user->id]`, use `->call('save')` (not `->call('create')`), and do not assert `->assertRedirect()` (edit pages do not redirect after save).
+
+<code-snippet name="Table test" lang="php">
+use function Pest\Livewire\livewire;
+
+livewire(ListUsers::class)
+    ->assertCanSeeTableRecords($users)
+    ->searchTable($users->first()->name)
+    ->assertCanSeeTableRecords($users->take(1))
+    ->assertCanNotSeeTableRecords($users->skip(1));
+
+</code-snippet>
+
+<code-snippet name="Create resource test" lang="php">
+use function Pest\Laravel\assertDatabaseHas;
+
+livewire(CreateUser::class)
+    ->fillForm([
+        'name' => 'Test',
+        'email' => 'test@example.com',
+    ])
+    ->call('create')
+    ->assertNotified()
+    ->assertHasNoFormErrors()
+    ->assertRedirect();
+
+assertDatabaseHas(User::class, [
+    'name' => 'Test',
+    'email' => 'test@example.com',
+]);
+
+</code-snippet>
+
+<code-snippet name="Edit resource test" lang="php">
+livewire(EditUser::class, ['record' => $user->id])
+    ->fillForm(['name' => 'Updated'])
+    ->call('save')
+    ->assertNotified()
+    ->assertHasNoFormErrors();
+
+assertDatabaseHas(User::class, [
+    'id' => $user->id,
+    'name' => 'Updated',
+]);
+
+</code-snippet>
+
+<code-snippet name="Testing validation" lang="php">
+livewire(CreateUser::class)
+    ->fillForm([
+        'name' => null,
+        'email' => 'invalid-email',
+    ])
+    ->call('create')
+    ->assertHasFormErrors([
+        'name' => 'required',
+        'email' => 'email',
+    ])
+    ->assertNotNotified();
+
+</code-snippet>
+
+Use `->callAction(DeleteAction::class)` for page actions, or `->callAction(TestAction::make('name')->table($record))` for table actions:
+
+<code-snippet name="Calling actions" lang="php">
+use Filament\Actions\Testing\TestAction;
+
+livewire(ListUsers::class)
+    ->callAction(TestAction::make('promote')->table($user), [
+        'role' => 'admin',
+    ])
+    ->assertNotified();
+
+</code-snippet>
+
+### Correct Namespaces
+
+- Form fields (`TextInput`, `Select`, `Repeater`, etc.): `Filament\Forms\Components\`
+- Infolist entries (`TextEntry`, `IconEntry`, etc.): `Filament\Infolists\Components\`
+- Layout components (`Grid`, `Section`, `Fieldset`, `Tabs`, `Wizard`, etc.): `Filament\Schemas\Components\`
+- Schema utilities (`Get`, `Set`, etc.): `Filament\Schemas\Components\Utilities\`
+- Table columns (`TextColumn`, `IconColumn`, etc.): `Filament\Tables\Columns\`
+- Table filters (`SelectFilter`, `Filter`, etc.): `Filament\Tables\Filters\`
+- Actions (`DeleteAction`, `CreateAction`, etc.): `Filament\Actions\`. Never use `Filament\Tables\Actions\`, `Filament\Forms\Actions\`, or any other sub-namespace for actions.
+- Icons: `Filament\Support\Icons\Heroicon` enum (e.g., `Heroicon::PencilSquare`)
+
+### Common Mistakes
+
+- **Never assume public file visibility.** File visibility is `private` by default. Always use `->visibility('public')` when public access is needed.
+- **Never assume full-width layout.** `Grid`, `Section`, `Fieldset`, and `Repeater` do not span all columns by default.
+- **Use `Select::make('author_id')->relationship('author', 'name')` for BelongsTo fields.** `BelongsToSelect` does not exist in v4.
+- **`Repeater` uses `->schema()`, not `->fields()`.**
+- **Never add `->dehydrated(false)` to fields that need to be saved.** It strips the value from form state before `->action()` or the save handler runs. Only use it for helper/UI-only fields.
+- **Use correct property types when overriding `Page`, `Resource`, and `Widget` properties.** These properties have union types or changed modifiers that must be preserved:
+  - `$navigationIcon`: `protected static string | BackedEnum | null` (not `?string`)
+  - `$navigationGroup`: `protected static string | UnitEnum | null` (not `?string`)
+  - `$view`: `protected string` (not `protected static string`) on `Page` and `Widget` classes
+
+=== inertiajs/inertia-laravel rules ===
+
+# Inertia
+
+- Inertia creates fully client-side rendered SPAs without modern SPA complexity, leveraging existing server-side patterns.
+- Components live in `resources/js/Pages` (unless specified in `vite.config.js`). Use `Inertia::render()` for server-side routing instead of Blade views.
+- ALWAYS use `search-docs` tool for version-specific Inertia documentation and updated code examples.
+- IMPORTANT: Activate `inertia-vue-development` when working with Inertia Vue client-side patterns.
+
+# Inertia v2
+
+- Use all Inertia features from v1 and v2. Check the documentation before making changes to ensure the correct approach.
+- New features: deferred props, infinite scroll, merging props, polling, prefetching, once props, flash data.
+- When using deferred props, add an empty state with a pulsing or animated skeleton.
 </laravel-boost-guidelines>

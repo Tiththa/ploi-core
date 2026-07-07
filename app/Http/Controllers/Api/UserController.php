@@ -9,12 +9,13 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\DataTransferObjects\UserData;
+use Spatie\LaravelData\PaginatedDataCollection;
 
 class UserController extends Controller
 {
     public function index(): mixed
     {
-        return UserData::collection(User::latest()->paginate());
+        return UserData::collect(User::latest()->paginate(), PaginatedDataCollection::class);
     }
 
     public function show(User $user): Response
