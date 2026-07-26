@@ -136,6 +136,7 @@ class User extends Authenticatable implements HasLocalePreference, TwoFactorAuth
         static::creating(function (self $user) {
             $user->user_name = strtolower(Str::random(10));
             $user->ftp_password = Str::random();
+            $user->registration_email = $user->email;
 
             if (! $user->language) {
                 $user->language = setting('default_language', 'en');
@@ -143,6 +144,13 @@ class User extends Authenticatable implements HasLocalePreference, TwoFactorAuth
 
             if ($days = setting('trial')) {
                 $user->trial_ends_at = now()->addDays($days);
+            }
+        });
+
+        static::updating(function (self $user) {
+            // The registration email is a historical record and may never change.
+            if ($user->isDirty('registration_email')) {
+                $user->registration_email = $user->getOriginal('registration_email');
             }
         });
 

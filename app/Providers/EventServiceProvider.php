@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
+use App\Listeners\RecordLastLoginIp;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\ResetTwoFactorAuthenticationSession;
@@ -19,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        Login::class => [
+            RecordLastLoginIp::class,
         ],
         Logout::class => [
             ResetTwoFactorAuthenticationSession::class,

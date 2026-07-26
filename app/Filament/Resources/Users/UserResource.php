@@ -2,28 +2,24 @@
 
 namespace App\Filament\Resources\Users;
 
+use App\Models\User;
+use Filament\Tables\Table;
 use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\Checkbox;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\EditAction;
+use Filament\Resources\Resource;
 use Filament\Actions\DeleteAction;
+use Filament\Forms\Components\Select;
 use Filament\Actions\DeleteBulkAction;
-use App\Filament\Resources\Users\RelationManagers\SitesRelationManager;
-use App\Filament\Resources\Users\RelationManagers\ServersRelationManager;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use App\Filament\Resources\Users\Pages\EditUser;
+use STS\FilamentImpersonate\Actions\Impersonate;
 use App\Filament\Resources\Users\Pages\ListUsers;
 use App\Filament\Resources\Users\Pages\CreateUser;
-use App\Filament\Resources\Users\Pages\EditUser;
-use Filament\Forms;
-use App\Models\User;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use STS\FilamentImpersonate\Actions\Impersonate;
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\Users\RelationManagers\SitesRelationManager;
+use App\Filament\Resources\Users\RelationManagers\ServersRelationManager;
 
 class UserResource extends Resource
 {
@@ -37,7 +33,7 @@ class UserResource extends Resource
 
     public static function getGloballySearchableAttributes(): array
     {
-        return ['user_name', 'name', 'email'];
+        return ['user_name', 'name', 'email', 'registration_email'];
     }
 
     public static function getLabel(): ?string
@@ -62,6 +58,16 @@ class UserResource extends Resource
                     ->email()
                     ->unique(table: User::class, column: 'email', ignoreRecord: true)
                     ->required(),
+                TextInput::make('registration_email')
+                    ->label(__('Registration e-mail address'))
+                    ->helperText(__('The e-mail address this user originally registered with. This never changes.'))
+                    ->disabled()
+                    ->hiddenOn('create'),
+                TextInput::make('ip')
+                    ->label(__('Last login IP address'))
+                    ->helperText(__('The IP address this user last logged in from.'))
+                    ->disabled()
+                    ->hiddenOn('create'),
                 Select::make('role')
                     ->options([
                         User::ADMIN => __('Administrator'),
@@ -103,6 +109,15 @@ class UserResource extends Resource
                 TextColumn::make('email')
                     ->label(__('E-mail address'))
                     ->searchable(),
+                TextColumn::make('registration_email')
+                    ->label(__('Registration e-mail address'))
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('ip')
+                    ->label(__('Last login IP address'))
+                    ->placeholder(__('Never logged in'))
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('servers_count')
                     ->label(__('Servers'))
                     ->counts('servers')
